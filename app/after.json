@@ -1,0 +1,66 @@
+{
+  "status": "completed",
+  "timestamp": "2026-05-09T08:30:00",
+  "description": "Final state after all tests run successfully",
+  "tests_run": 11,
+  "tests_passed": 11,
+  "tests_failed": 0,
+  "test_results": [
+    {
+      "test": "test_single_empty_function_has_complexity_1",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_if_increases_complexity",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_loop_increases_complexity",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_boolean_and_or_increase_complexity",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_elif_counts_as_complexity",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_except_increases_complexity",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_conditional_expression_counts",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_multiple_functions_return_multiple_values",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_nested_functions_are_independent",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_module_level_code_is_ignored",
+      "status": "PASSED",
+      "file": "tests/test_complexity.py"
+    },
+    {
+      "test": "test_cli_creates_reports_and_charts",
+      "status": "PASSED",
+      "file": "tests/test_cli.py"
+    }
+  ],
+  "summary": "All 11 tests passed successfully on empty codebase"
+}
