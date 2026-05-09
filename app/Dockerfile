@@ -1,22 +1,21 @@
-FROM python:3.12-alpine
+FROM python:3.10-slim
 
+# Install required system dependencies
+RUN apt-get update \
+    && apt-get install -y git unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create directories expected by validation.sh
+RUN mkdir -p /app /eval_assets
+
+# Set working directory
 WORKDIR /app
 
-# Install git and other dependencies
-RUN apk add --no-cache git
+# Copy validation helper scripts ONLY
+COPY run.sh parsing.py validation.sh ./
 
-# Copy application files
-COPY metrics_cli.py .
-COPY complexity.py .
-COPY analyzer.py .
-COPY report.py .
-COPY charts.py .
+# Make scripts executable
+RUN chmod +x run.sh validation.sh
 
-# Install Python dependencies
-RUN pip install --no-cache-dir matplotlib
-
-# Make the script executable
-RUN chmod +x metrics_cli.py
-
-# Default command
-CMD ["python", "metrics_cli.py", "--help"]
+# Keep container alive for docker exec steps
+CMD ["tail", "-f", "/dev/null"]
