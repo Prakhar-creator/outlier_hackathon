@@ -1,0 +1,7 @@
+{
+  "name": "Hackathon Dev",
+  "dockerFile": "Dockerfile",
+  "context": ".",
+  "runArgs": ["--init"],
+  "settings": { "terminal.integrated.shell.linux": "/bin/bash" }
+}
