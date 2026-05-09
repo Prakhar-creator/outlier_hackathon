@@ -1,0 +1,28 @@
+name: Run Validation Script
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Make validation script executable
+        run: chmod +x app/validation.sh
+
+      - name: Run validation.sh
+        run: ./app/validation.sh
+
+      - name: Upload validation results
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-results
+          path: |
+            app/before.json
+            app/after.json
+            app/fail_to_pass.json
+            app/pass_to_pass.json
