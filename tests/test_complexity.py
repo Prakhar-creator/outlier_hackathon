@@ -1,9 +1,9 @@
-
 import sys
 import os
+import pytest
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-import pytest
 
 def get_compute_function():
     try:
@@ -13,9 +13,15 @@ def get_compute_function():
         return None
 
 
-def test_single_empty_function_has_complexity_1():
+def require_compute():
     compute = get_compute_function()
-    assert compute is not None
+    if compute is None:
+        pytest.fail("compute_function_complexities not implemented yet")
+    return compute
+
+
+def test_single_empty_function_has_complexity_1():
+    compute = require_compute()
 
     source = """
 def foo():
@@ -25,8 +31,7 @@ def foo():
 
 
 def test_if_increases_complexity():
-    compute = get_compute_function()
-    assert compute is not None
+    compute = require_compute()
 
     source = """
 def foo(x):
@@ -38,8 +43,7 @@ def foo(x):
 
 
 def test_loop_increases_complexity():
-    compute = get_compute_function()
-    assert compute is not None
+    compute = require_compute()
 
     source = """
 def foo(items):
@@ -50,8 +54,7 @@ def foo(items):
 
 
 def test_boolean_and_or_increase_complexity():
-    compute = get_compute_function()
-    assert compute is not None
+    compute = require_compute()
 
     source = """
 def foo(a, b, c):
@@ -63,8 +66,7 @@ def foo(a, b, c):
 
 
 def test_elif_counts_as_complexity():
-    compute = get_compute_function()
-    assert compute is not None
+    compute = require_compute()
 
     source = """
 def foo(x):
@@ -79,8 +81,7 @@ def foo(x):
 
 
 def test_except_increases_complexity():
-    compute = get_compute_function()
-    assert compute is not None
+    compute = require_compute()
 
     source = """
 def foo():
@@ -93,8 +94,7 @@ def foo():
 
 
 def test_conditional_expression_counts():
-    compute = get_compute_function()
-    assert compute is not None
+    compute = require_compute()
 
     source = """
 def foo(x):
@@ -104,8 +104,7 @@ def foo(x):
 
 
 def test_multiple_functions_return_multiple_values():
-    compute = get_compute_function()
-    assert compute is not None
+    compute = require_compute()
 
     source = """
 def foo():
@@ -119,8 +118,7 @@ def bar(x):
 
 
 def test_nested_functions_are_independent():
-    compute = get_compute_function()
-    assert compute is not None
+    compute = require_compute()
 
     source = """
 def outer(x):
@@ -133,8 +131,7 @@ def outer(x):
 
 
 def test_module_level_code_is_ignored():
-    compute = get_compute_function()
-    assert compute is not None
+    compute = require_compute()
 
     source = """
 if True:

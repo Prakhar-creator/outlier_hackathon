@@ -21,13 +21,10 @@ def write_file(path, content):
 
 
 def test_cli_creates_reports_and_charts():
-    # Fail cleanly if CLI script is missing
-    assert os.path.exists(
-        "metrics_cli.py"
-    ), "metrics_cli.py must exist at repo root"
+    # This assertion FAILS cleanly before code injection
+    assert os.path.exists("metrics_cli.py"), "metrics_cli.py must exist at repo root"
 
     with tempfile.TemporaryDirectory() as repo, tempfile.TemporaryDirectory() as out:
-        # Initialize git repo
         git(["init"], cwd=repo)
 
         write_file(
@@ -41,7 +38,6 @@ def test_cli_creates_reports_and_charts():
         git(["add", "."], cwd=repo)
         git(["commit", "-m", "initial commit"], cwd=repo)
 
-        # Run CLI
         result = subprocess.run(
             [
                 sys.executable,
@@ -60,7 +56,6 @@ def test_cli_creates_reports_and_charts():
 
         assert result.returncode == 0
 
-        # Output artifacts
         summary_path = os.path.join(out, "summary.json")
         chart_path = os.path.join(out, "code_lines_trend.png")
 
